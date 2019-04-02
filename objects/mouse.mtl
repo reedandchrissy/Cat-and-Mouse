@@ -1,8 +1,8 @@
-# Blender MTL File: 'cat_rat2.blend'
+# Blender MTL File: 'cat_rat4.blend'
 # Material Count: 2
 
-newmtl Eyes
-Ns 96.078431
+newmtl Eyes.003
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.048575 0.048575 0.048575
 Ks 0.500000 0.500000 0.500000
@@ -11,8 +11,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Rat1_body
-Ns 96.078431
+newmtl Rat1_body.003
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.456376 0.456376 0.456376
 Ks 0.500000 0.500000 0.500000
