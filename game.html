@@ -3,17 +3,23 @@
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-    <title>Maze Game</title>
+    <title>Rats'N'Cats</title>
   </head>
   <body>
     <a-scene>
    <!----------------------------------------------------- assets ---------------------------------------------------------------->
-      <a-asset-item id="maze-mtl" src="assets/maze.mtl"></a-asset-item>
-      <a-asset-item id="maze-obj" src="assets/maze.obj"></a-asset-item>
+      <a-asset-item id="landscape-mtl" src="assets/landscape.mtl"></a-asset-item>
+      <a-asset-item id="landscape-obj" src="assets/landscape.obj"></a-asset-item>
+      <a-asset-item id="tree-mtl" src="assets/singletree.mtl"></a-asset-item>
+      <a-asset-item id="tree-obj" src="assets/singletree.obj"></a-asset-item>
+      <a-asset-item id="twotrees-mtl" src="assets/twotrees.mtl"></a-asset-item>
+      <a-asset-item id="twotrees-obj" src="assets/twotrees.obj"></a-asset-item>
 
    <!----------------------------------------------------- models ---------------------------------------------------------------->
-      <a-sky color="#ECECEC"></a-sky>
-      <a-entity obj-model="obj: #maze-obj; mtl: #maze-mtl" position="15 -10 0" scale="1 1 1" rotation="0 90 0"></a-entity>
+      <a-sky color="#58D3F7"></a-sky>
+      <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="30 -30 -20" scale="10 10 10" rotation="0 270 0"></a-entity>
+      <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="60 -30 -110" scale="30 30 30" rotation="0 90 0"></a-entity>
+      <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="60 -30 -80" scale="30 30 30" rotation="0 90 0"></a-entity>
 
     </a-scene>
   </body>
