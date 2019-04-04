@@ -1,10 +1,10 @@
-# maze-aframe
-Home page for Team 3D Animation Station's Maze Aframe Game
+# shooter-aframe
+Home page for Team 3D Animation Station's Shooter Aframe Game
 
-You are a mouse who lies at the entrance of a maze. Your goal is to find the cheese that lies somewhere within the Maze.
+You are a shooter in a stationary position, fighting off waves of enemies from multiple spawn points. Your goal is to fend off the oncoming enemies for as long as possible.
 
-Win condition:
-  - Find the cheese
+Lose Condition:
+The enemies get you
 
-Lose condition:
-  - The cat catches you
+Objective:
+Survive - no win, just exist as long as possible.
