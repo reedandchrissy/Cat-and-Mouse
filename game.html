@@ -14,13 +14,22 @@
       <a-asset-item id="tree-obj" src="assets/singletree.obj"></a-asset-item>
       <a-asset-item id="twotrees-mtl" src="assets/twotrees.mtl"></a-asset-item>
       <a-asset-item id="twotrees-obj" src="assets/twotrees.obj"></a-asset-item>
-
+      <a-asset-item id="cat-obj" src="objects/cat.obj"></a-asset-item>
+      <a-asset-item id="cat-mtl" src="objects/cat.mtl"></a-asset-item>
+      <a-asset-item id="mouse-obj" src="objects/mouse.obj"></a-asset-item>
+      <a-asset-item id="mouse-mtl" src="objects/mouse.mtl"></a-asset-item>
+      <a-asset-item id="cheese-obj" src="objects/cheese.obj"></a-asset-item>
+      <a-asset-item id="cheese-mtl" src="objects/cheese.mtl"></a-asset-item>
+      
    <!----------------------------------------------------- models ---------------------------------------------------------------->
       <a-sky color="#58D3F7"></a-sky>
       <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="30 -30 -20" scale="10 10 10" rotation="0 270 0"></a-entity>
       <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="60 -30 -110" scale="30 30 30" rotation="0 90 0"></a-entity>
       <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="60 -30 -80" scale="30 30 30" rotation="0 90 0"></a-entity>
-
+	  <a-obj-model position="-2 -10 0" scale = "2 2 2" rotation = "0 -120 0" src="#cat-obj" mtl="#cat-mtl"></a-obj-model>
+	  <a-obj-model position="5 -10 0" scale = "1 1 1" src="#mouse-obj" mtl="#mouse-mtl"></a-obj-model>
+	  <a-obj-model position="0 -10 0" scale = "1 1 1" src="#cheese-obj" mtl="#cheese-mtl"></a-obj-model>
+	 
     </a-scene>
   </body>
 </html>
