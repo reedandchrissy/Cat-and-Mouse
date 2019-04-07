@@ -48,8 +48,11 @@
       <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="0 0 -75" scale="10 10 10" rotation="0 50 0"></a-entity>
       <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="10 0 -75" scale="10 10 10" rotation="0 50 0"></a-entity>
 
+  <!----------------------------------------------------- HUD ----------- ---------------------------------------------------------------->
       <a-entity camera wasd-controls look-controls position="0 2 30">
-        <a-cursor material="color: white; shader: flat">
+        <a-text id="score" value="Score" position="-1.6 -0.55 -1" color="red" width="3" anchor="left"></a-text>
+        <a-text id="health" value="Health" position="-1.6 -0.7 -1" color="red" width="3" anchor="left"></a-text>
+        <a-cursor material="color: red; shader: flat">
             <a-entity position="0 -5.5 0" id='weapon'>
                 <a-entity obj-model="obj: #cheese-obj; mtl: #cheese-mtl" scale="1 1 1" rotation= "0 0 0"></a-entity>
             </a-entity>
