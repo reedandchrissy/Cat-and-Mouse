@@ -17,8 +17,7 @@
   </head>
 
   <body>
-    <a-scene physics="friction:0.0; restitution:0.2; debug:true"
-        renderer="antialias:true" >
+    <a-scene physics="friction:0.0; restitution:0.2; debug:true" renderer="antialias:true" >
    <!----------------------------------------------------- assets ---------------------------------------------------------------->
       <a-asset-item id="landscape-mtl" src="assets/landscape.mtl"></a-asset-item>
       <a-asset-item id="landscape-obj" src="assets/landscape.obj"></a-asset-item>
@@ -38,8 +37,8 @@
       <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="30 0 -20" scale="10 10 10" rotation="0 270 0"></a-entity>
       <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="-130 0 100" scale="100 100 100" rotation="0 90 0"></a-entity>
       <a-entity geometry="primitive:plane; height:1000; width:1000" static-body position="0 0 0" rotation="-90 0 0"></a-entity>
-      <a-obj-model id="cat" follow="target:#player; speed:1" position="-4 1 -10" scale = "1 1 1" rotation = "0 -120 0" src="#cat-obj" mtl="#cat-mtl" dynamic-body="angularDamping:0.99; shape:cylinder" ></a-obj-model>
-	  <a-obj-model follow="target:#player; speed:1" position="-10 1 -10" scale = "1 1 1" src="#mouse-obj" mtl="#mouse-mtl" dynamic-body="angularDamping:0.99; shape:cylinder" ></a-obj-model>
+      <a-obj-model id="cat" follow="target:#player; speed:1" position="-4 1 -10" scale = "2 2 2" rotation = "0 -120 0" src="#cat-obj" mtl="#cat-mtl" dynamic-body="angularDamping:0.99; shape:cylinder" ></a-obj-model>
+	  <a-obj-model follow="target:#player; speed:1" position="-10 1 -10" scale = "2 2 2" src="#mouse-obj" mtl="#mouse-mtl" dynamic-body="angularDamping:0.99; shape:cylinder" ></a-obj-model>
 	 
    <!----------------------------------------------------- large trees ---------------------------------------------------------------->
       <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="60 0 -110" scale="30 30 30" rotation="0 90 0"></a-entity>
@@ -59,17 +58,16 @@
       <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="10 0 -75" scale="10 10 10" rotation="0 50 0"></a-entity>
 
   <!----------------------------------------------------- HUD ----------- ---------------------------------------------------------------->
-      <a-entity camera wasd-controls look-controls id= "player" position="0 1.6 0" shoot="direction: 0 0 -1; spaceKeyEnabled: true">
+      <a-entity camera wasd-controls look-controls id= "player" position="0 3 0" shoot="direction: 0 0 -1; spaceKeyEnabled: true">
         <a-text id="score" value="Score" position="-1.6 -0.55 -1" color="red" width="3" anchor="left"></a-text>
         <a-text id="health" value="Health" position="-1.6 -0.7 -1" color="red" width="3" anchor="left"></a-text>
         <a-cursor material="color: red; shader: flat">
-            <a-entity position="0 -5.5 0" id='weapon'>
-                <a-entity obj-model="obj: #cheese-obj; mtl: #cheese-mtl" scale="1 1 1" rotation= "0 0 0" static-body></a-entity>
-            </a-entity>
+            <a-entity id="weapon" position="0 -5.5 0" obj-model="obj: #cheese-obj; mtl: #cheese-mtl" scale="1 1 1" rotation= "0 0 0" static-body></a-entity>
         </a-cursor>
       </a-entity>
 
 
     </a-scene>
+<script src="js/interactions.js"></script>
   </body>
 </html>
