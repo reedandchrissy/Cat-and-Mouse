@@ -1,23 +1,20 @@
 <html>
   <head>
     <script src="js/aframe.js"></script>
-    <script src="js/follow.js"></script>
-    <script src="js/aframe-extras.js"></script>
-    <script src="js/aframe-physics-system.js"></script>
+    <script src="js/aframe-look-at-component.min.js"></script>
+    <script src="js/aframe-spawnpoint-component.min.js"></script>
+    <script src="js/shooting.js"></script>
+    <script src="js/aframe-super-shooter-kit.min.js"></script> 
 
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
     <title>Rats'N'Cats</title>
 
-    <script>
-        $ = (sel) => document.querySelector(sel)
-        $$ = (sel) => document.querySelectorAll(sel)
-        on = (elem, type, hand) => elem.addEventListener(type,hand)
-    </script>
   </head>
 
   <body>
-    <a-scene physics="friction:0.0; restitution:0.2; debug:true" renderer="antialias:true" >
+    <a-scene>
+
    <!----------------------------------------------------- assets ---------------------------------------------------------------->
       <a-asset-item id="landscape-mtl" src="assets/landscape.mtl"></a-asset-item>
       <a-asset-item id="landscape-obj" src="assets/landscape.obj"></a-asset-item>
@@ -36,9 +33,8 @@
       <a-sky color="#58D3F7"></a-sky>
       <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="30 0 -20" scale="10 10 10" rotation="0 270 0"></a-entity>
       <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="-130 0 100" scale="100 100 100" rotation="0 90 0"></a-entity>
-      <a-entity geometry="primitive:plane; height:1000; width:1000" static-body position="0 0 0" rotation="-90 0 0"></a-entity>
-      <a-obj-model follow="target:#player; speed:1" position="-4 1 -10" scale = "2 2 2" rotation = "0 -120 0" src="#cat-obj" mtl="#cat-mtl" dynamic-body="shape:cylinder" ></a-obj-model>
-	  <a-obj-model follow="target:#player; speed:1" position="-10 1 -10" scale = "2 2 2" src="#mouse-obj" mtl="#mouse-mtl" dynamic-body="shape:cylinder" ></a-obj-model>
+      <a-obj-model class="target" target="healthPoints: 10" position="-4 0 -10" obj-model="obj: #cat-obj; mtl: #cat-mtl"  look-at="0 0 0"></a-obj-model>
+	  <a-obj-model position="-10 1 -10" src="#mouse-obj" mtl="#mouse-mtl"></a-obj-model>
 	 
    <!----------------------------------------------------- large trees ---------------------------------------------------------------->
       <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="60 0 -110" scale="30 30 30" rotation="0 90 0"></a-entity>
@@ -58,21 +54,24 @@
       <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="10 0 -75" scale="10 10 10" rotation="0 50 0"></a-entity>
 
   <!----------------------------------------------------- HUD ----------- ---------------------------------------------------------------->
-      <a-entity camera wasd-controls look-controls id= "player" position="0 3 0" shoot="direction: 0 0 -1; spaceKeyEnabled: true">
-        <a-text id="score text" value="Score" position="-2.2 -0.55 -1" color="red" width="3" anchor="left"></a-text>
-        <a-text id="health text" value="Health" position="-2.2 -0.7 -1" color="red" width="3" anchor="left"></a-text>
-        <a-text id="score" value="0" position="-1.6 -0.55 -1" color="red" width="3" anchor="left"></a-text>
-        <a-text id="health" value="3" position="-1.6 -0.7 -1" color="red" width="3" anchor="left"></a-text>
-        <a-cursor material="color: red; shader: flat">
-            <a-entity id="weapon" position="0 -5.5 0" obj-model="obj: #cheese-obj; mtl: #cheese-mtl" scale="1 1 1" rotation= "0 0 0" static-body></a-entity>
-        </a-cursor>
+      <a-entity camera look-controls id= "player" position="0 1.6 0">
+
+        <a-text id="score text" value="Score:" position="-2.2 -0.55 -1" color="red" width="2" anchor="left"></a-text>
+        <a-text id="score" value="0" position="-1.6 -0.55 -1" color="red" width="2" anchor="left"></a-text>
+
+        <a-text id="points text" value="Score needed:" position="-2.2 -0.65 -1" color="red" width="2" anchor="left"></a-text>
+        <a-text id="points" value="0" position="-1.6 -0.65 -1" color="red" width="2" anchor="left"></a-text>
+
+        <a-text id="counter text" value="Enemies left:" position="-2.2 -0.75 -1" color="red" width="2" anchor="left"></a-text>
+        <a-text id="counter" value="0" position="-1.6 -0.75 -1" color="red" width="2" anchor="left"></a-text>
+
+
+        <a-entity id="weapon" position="0 -1.5 -1" geometry="primitive: sphere" material="color: orange" rotation= "0 0 0"></a-entity>
+        <a-entity id="gun" shooter geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3" material="color: red" click-to-shoot position="0 -0.75 0"></a-entity>
+        <a-entity id="bulletTemplate" bullet geometry="primitive: sphere; radius: 0.1" material="color: orange"></a-entity>
+ 
       </a-entity>
 
-
     </a-scene>
-
-    <!---- Must wait until scene is loaded before loading this script---->
-    <script src="js/interactions.js"></script>
-
   </body>
 </html>
