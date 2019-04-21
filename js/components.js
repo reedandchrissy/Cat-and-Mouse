@@ -1,3 +1,5 @@
+    var gameTimer = 15000;    
+
     /**
      * Click mouse to shoot.
      */
@@ -36,6 +38,15 @@
 
     });
 
+     AFRAME.registerComponent('timer', {
+      tick: function (time, timeDelta) {
+        let timer = document.querySelector('#scene').querySelector('#player').querySelector('#time');
+        let timeLeft = gameTimer - timeDelta;
+        gameTimer -= timeDelta;
+        timer.setAttribute('value', timeLeft / 1000);
+      }
+    });
+
      AFRAME.registerComponent('spawn', {
 
       init: function () {
@@ -46,8 +57,12 @@
       },
 
       tick: function (time, timeDelta) {
+        if(gameTimer <= 0 ){
+          console.log("You lose!!!");
+          //Insert lose event here
+        }
         let enemiesLeft = parseInt(document.querySelector('#scene').querySelector('#player').querySelector('#counter').getAttribute('value'));
-        if(enemiesLeft == 0){
+        if(enemiesLeft == 0 && gameTimer > 0 ){
           updateWaveCounter();
           let wave = parseInt(document.querySelector('#scene').querySelector('#player').querySelector('#wave').getAttribute('value'));
           if(wave < 4){
