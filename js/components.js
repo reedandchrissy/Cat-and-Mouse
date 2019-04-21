@@ -28,6 +28,7 @@
           let oldScore = parseInt(score.getAttribute('value'));
           let counter = document.querySelector('#scene').querySelector('#counter');
           let oldCounter = parseInt(counter.getAttribute('value'));
+          gameTimer += 3000;
 
           counter.setAttribute('value', oldCounter - 1);
           score.setAttribute('value', oldScore + 1);
