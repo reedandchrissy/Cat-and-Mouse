@@ -44,7 +44,7 @@
         let timer = document.querySelector('#scene').querySelector('#player').querySelector('#time');
         let timeLeft = gameTimer - timeDelta;
         gameTimer -= timeDelta;
-        timer.setAttribute('value', timeLeft / 1000);
+        timer.setAttribute('value', Math.ceil(timeLeft / 1000));
       }
     });
 
