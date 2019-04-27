@@ -54,12 +54,12 @@
 
       <!---------------------------scene0------------------------------------------> 
   <script id="coinsTemplate" type="text/x-nunjucks-template">
-      {% for x in range(0, 3) %}
+      {% for x in range(0, 4) %}
         {% for z in range(0, 3) %}
-        <a-cylinder mixin="coin" score="10" rotation={{r}}
-        position="{{ x * 20 - 50 }} 10 {{ z * 10 - 50}}">
-      </a-cylinder>
-      {% endfor %}
+          <a-cylinder mixin="coin" score="10" rotation={{r}}
+                    position="{{ x * 20 - 30 }} 10 {{ z * 20 - 30}}">
+          </a-cylinder>
+        {% endfor %}
       {% endfor %}
     </script>
 
@@ -99,10 +99,11 @@
  // donuts to increase your health
 
 
- <a-torus mixin="donut" health="5" position="3 10 -5"></a-torus>
- <a-torus mixin="donut" health="5" position="-3 10 -5"></a-torus>
- <a-torus mixin="donut" health="5" position="0 10 -5"></a-torus>
-
+  <a-torus mixin="donut" health="5" position="-9 10 -21"></a-torus>
+  <a-torus mixin="donut" health="5" position="-18 10 -6"></a-torus>
+  <a-torus mixin="donut" health="5" position="3 10 -21"></a-torus>
+  <a-torus mixin="donut" health="5" position="12 10 -8"></a-torus>
+  <a-torus mixin="donut" health="5" position="3 10 -5"></a-torus>
 
  // LIGHTING
  <!-- we add a point light and some ambient light -->
@@ -120,15 +121,18 @@ rotation="-90 0 0" scale="2 2 1">
 
 
 // AVATAR with Camera and movement controls
-<a-box  id="avbox" wasd-controls look-controls position="0 1.5 13">
+ <a-box  id="avbox" wasd-controls look-controls position="0 1.5 13">
   <a-entity id="camera2" camera>
     <a-entity id="hud" health="10" score="0" text="width:3; value: Start Game!;" position="0 1 -2"></a-entity>
+    <a-entity id="gun" shooter geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3" material="color: red" click-to-shoot position="0 0 0"></a-entity>
+    <a-entity id="bulletTemplate" bullet="name: normal; speed: 20.0; poolSize: 20" scale=".5 .5 .5" obj-model="obj: #cheese-obj; mtl: #cheese-mtl"></a-entity>
   </a-entity>
 
   <a-box id="avatar" powerup static-body scale="2 2 2" position="0 0 0" material="color:red">
     <a-sound src="#music1" autoplay="true"></a-sound>
   </a-box>
 </a-box>
+
 
 </a-scene>
 
