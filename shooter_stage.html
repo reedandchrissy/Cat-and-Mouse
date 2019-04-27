@@ -27,6 +27,7 @@
    <a-asset-item id="mouse-mtl" src="assets/mouse.mtl"></a-asset-item>
    <a-asset-item id="cheese-obj" src="assets/cheese.obj"></a-asset-item>
    <a-asset-item id="cheese-mtl" src="assets/cheese.mtl"></a-asset-item>
+   <audio id="music" src="sounds/techno-80-base-loop.mp3" preload="true"></audio>
 
    <!----------------------------------------------------- models ---------------------------------------------------------------->
    <a-sky color="#58D3F7"></a-sky>
@@ -53,6 +54,8 @@
 
    <!----------------------------------------------------- HUD ----------- ---------------------------------------------------------------->
    <a-entity camera look-controls id="player" position="0 1.6 0">
+
+    <a-sound src="#music" autoplay="true" loop="true"></a-sound>
 
     <a-text id="score text" value="Score:" position="-0.1 -0.15 -0.7" color="red" width="1" anchor="left"></a-text>
     <a-text id="score" value="0" position="0.1 -0.15 -0.7" color="red" width="1" anchor="left"></a-text>

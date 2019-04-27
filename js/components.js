@@ -2,7 +2,12 @@
 
      AFRAME.registerComponent('click-to-shoot', {
       init: function () {
-        document.body.addEventListener('mousedown', () => { this.el.emit('shoot'); });
+        document.body.addEventListener('mousedown', () => { 
+          this.el.emit('shoot'); 
+          let audio = new Audio('sounds/retro-shot-blaster.wav');
+          audio.volume = 0.5;
+          audio.play();
+        });
       }
     });
 
@@ -43,7 +48,11 @@
           let oldScore = parseInt(score.getAttribute('value'));
           let counter = document.querySelector('#scene').querySelector('#counter');
           let oldCounter = parseInt(counter.getAttribute('value'));
+          let audio = new Audio('sounds/cat-screaming.wav');
           gameTimer += 3000;
+
+          audio.volume = 0.5;
+          audio.play();
 
           counter.setAttribute('value', oldCounter - 1);
           score.setAttribute('value', oldScore + 1);
@@ -115,7 +124,6 @@
       let newEnemy = document.querySelector('#scene').querySelector('#base').cloneNode(true);
       let counter = document.querySelector('#scene').querySelector('#counter');
       let oldCounter = parseInt(counter.getAttribute('value'));
-      console.log(newEnemy)
       counter.setAttribute('value', oldCounter + 1);
       newEnemy.setAttribute('position', position);
       document.body.querySelector('#scene').appendChild(newEnemy);
