@@ -1,4 +1,4 @@
-    var gameTimer = 15000;    
+    var gameTimer = 10000;    
 
      AFRAME.registerComponent('click-to-shoot', {
       init: function () {
@@ -15,7 +15,7 @@
         });
       }
     });
-
+    
      AFRAME.registerComponent('load-shooter-stage', {
       dependencies: ['material'],
 
@@ -72,19 +72,26 @@
       },
 
       tick: function (time, timeDelta) {
-        if(gameTimer <= 0 ){
-          console.log("You lose!!!");
-          //Insert lose event here
+        let wave = document.querySelector('#scene').querySelector('#player').querySelector('#wave');
+        let waveText = document.querySelector('#scene').querySelector('#player').querySelector('#wavetext');
+        let ingameTime = gameTimer / 1000;
+        if( ingameTime <= -5 ){
+          window.history.back();
+        } 
+        if(ingameTime <= 0 ){
+          waveText.setAttribute('value', 'You');
+          wave.setAttribute('value', 'lose!');
         }
         let enemiesLeft = parseInt(document.querySelector('#scene').querySelector('#player').querySelector('#counter').getAttribute('value'));
         if(enemiesLeft == 0 && gameTimer > 0 ){
           updateWaveCounter();
-          let wave = parseInt(document.querySelector('#scene').querySelector('#player').querySelector('#wave').getAttribute('value'));
-          if(wave < 4){
-            spawnNewWave(wave);
+          let newWave = parseInt(wave.getAttribute('value'));
+          if(newWave < 4){
+            spawnNewWave(newWave);
           } else {
-            console.log("You win!");
-            //Insert win event here
+            waveText.setAttribute('value', 'You');
+            wave.setAttribute('value', 'win!');
+            setTimeout(function(){ window.history.back(); }, 5000);
           }
         }
 

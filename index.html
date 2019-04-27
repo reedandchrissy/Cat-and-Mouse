@@ -38,10 +38,10 @@
     <a-text text="value: You are the rat, in order to avoid the cat, \nyou should either be a fast runner or a smart shooter\n;" position = "0 2.5 -5" color="red" transparent = true scale = "1 0.9 0.9" anchor = center ></a-text>
 
     <a-obj-model id="base" class="target" target="healthPoints: 2" position="-4 1 -5" obj-model="obj: #b_cat-obj; mtl: #b_cat-mtl" hit-handler look-at="#player" load-runner-stage></a-obj-model>
-    <a-text value="Level 1" position = "-4.75 3 -5" color="red" transparent = true scale ="2 2 2" ></a-text>
+    <a-text value="Runner" position = "-4.75 3 -5" color="red" transparent = true scale ="2 2 2" ></a-text>
 
     <a-obj-model id="base" class="target" target="healthPoints: 2" position="4 1 -5" obj-model="obj: #o_cat-obj; mtl: #o_cat-mtl" hit-handler look-at="#player" load-shooter-stage></a-obj-model>
-    <a-text value="Level 2" position = "3.25 3 -5 1 0" color="red" scale = "2 2 2" ></a-text>
+    <a-text value="Shooter" position = "3.25 3 -5 1 0" color="red" scale = "2 2 2" ></a-text>
 
     <a-light id="ambient1" type="ambient" color="#e9f2f1" >
       <a-animation attribute="intensity" begin="aaa" from="0" to="1" delay="100" dur="1000" fill="both"></a-animation>

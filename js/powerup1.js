@@ -55,6 +55,7 @@ AFRAME.registerComponent('powerup', {
     if (timeLeft <0) {
      this.gameOver=true
      hud.setAttribute('text','value',"TIMESUP!  YOU LOSE!! GAME OVER!")
+     setTimeout(function(){ window.history.back(); }, 5000);
     }
 
     if (otherBody) {
@@ -99,10 +100,12 @@ AFRAME.registerComponent('powerup', {
       if (this.health <0){
         hud.setAttribute('text','value',"YOU LOSE!! GAME OVER!")
         this.gameOver = true
+        setTimeout(function(){ window.history.back(); }, 5000);
       }
       if (this.score>20){
         hud.setAttribute('text','value',"YOU WIN!!")
         this.gameOver = true
+        setTimeout(function(){ window.history.back(); }, 5000);
       }
 
 

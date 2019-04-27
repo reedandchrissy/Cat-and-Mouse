@@ -63,11 +63,11 @@
     <a-text id="counter text" value="Enemies:" position="-0.1 -0.25 -0.7" color="red" width="1" anchor="left"></a-text>
     <a-text id="counter" value="0" position="0.1 -0.25 -0.7" color="red" width="1" anchor="left"></a-text>
 
-    <a-text id="wave text" value="WAVE" position="-0.1 0.45 -1" color="red" width="2" anchor="left"></a-text>
+    <a-text id="wavetext" value="WAVE" position="-0.1 0.45 -1" color="red" width="2" anchor="left"></a-text>
     <a-text id="wave" value="1" position="0 0.35 -1" color="red" width="2" anchor="left"></a-text>
 
     <a-entity id="gun" shooter geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3" material="color: red" click-to-shoot position="0 0 0"></a-entity>
-    <a-entity id="bulletTemplate" bullet="name: normal; speed: 20.0; poolSize: 20" obj-model="obj: #cheese-obj; mtl: #cheese-mtl"></a-entity>
+    <a-entity id="bulletTemplate" bullet="name: normal; speed: 20.0; poolSize: 20" scale=".5 .5 .5" obj-model="obj: #cheese-obj; mtl: #cheese-mtl"></a-entity>
   </a-entity>
 
 
