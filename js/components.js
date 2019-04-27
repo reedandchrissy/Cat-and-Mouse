@@ -1,17 +1,32 @@
     var gameTimer = 15000;    
 
-    /**
-     * Click mouse to shoot.
-     */
      AFRAME.registerComponent('click-to-shoot', {
       init: function () {
         document.body.addEventListener('mousedown', () => { this.el.emit('shoot'); });
       }
     });
 
-    /**
-     * Disappear at 0hp.
-     */
+      AFRAME.registerComponent('load-runner-stage', {
+      dependencies: ['material'],
+      init: function () {
+
+        this.el.addEventListener('hit', () => {
+          window.location.href = "runner_stage.html";
+        });
+      }
+    });
+
+     AFRAME.registerComponent('load-shooter-stage', {
+      dependencies: ['material'],
+
+      init: function () {
+
+        this.el.addEventListener('hit', () => {
+          window.location.href = "shooter_stage.html";
+        });
+      }
+    });
+
      AFRAME.registerComponent('hit-handler', {
       dependencies: ['material'],
 
@@ -36,7 +51,6 @@
             scene.removeChild(this.el) //removes object from DOM; used to delete bounding box
           });
       }
-
     });
 
      AFRAME.registerComponent('timer', {
@@ -94,6 +108,7 @@
       let newEnemy = document.querySelector('#scene').querySelector('#base').cloneNode(true);
       let counter = document.querySelector('#scene').querySelector('#counter');
       let oldCounter = parseInt(counter.getAttribute('value'));
+      console.log(newEnemy)
       counter.setAttribute('value', oldCounter + 1);
       newEnemy.setAttribute('position', position);
       document.body.querySelector('#scene').appendChild(newEnemy);
