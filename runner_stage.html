@@ -12,10 +12,26 @@
   <script src="js/powerup1.js"></script>  
   <script src="js/components.js"></script>
   <script src="js/aframe-look-at-component.min.js"></script>
+  
+  <script id="coinsTemplate" type="text/x-nunjucks-template">
+      {% for x in range(0, 4) %}
+        {% for z in range(0, 3) %}
+          <a-cylinder mixin="coin" score="10" rotation={{r}}
+                    position="{{ x * 20 - 30 }} 10 {{ z * 20 - 30}}">
+          </a-cylinder>
+        {% endfor %}
+      {% endfor %}
+    </script>
 
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <script id="timeTemplate" type="text/x-nunjucks-template">
+     {% for x in range(0, 5) %}
+     {% for z in range(0, 5) %}
+     <a-entity mixin="cheese" time="10" scale="0.5 0.5 0.5" rotation={{r}}
+     position="{{ x * 15 - 47 }} 10 {{ z * 15 - 47}}">
+   </a-entity>
+   {% endfor %}
+   {% endfor %}
+ </script>
 </head>
 
 <body>
@@ -53,25 +69,7 @@
     </a-assets>
 
       <!---------------------------scene0------------------------------------------> 
-  <script id="coinsTemplate" type="text/x-nunjucks-template">
-      {% for x in range(0, 4) %}
-        {% for z in range(0, 3) %}
-          <a-cylinder mixin="coin" score="10" rotation={{r}}
-                    position="{{ x * 20 - 30 }} 10 {{ z * 20 - 30}}">
-          </a-cylinder>
-        {% endfor %}
-      {% endfor %}
-    </script>
-
-    <script id="timeTemplate" type="text/x-nunjucks-template">
-     {% for x in range(0, 5) %}
-     {% for z in range(0, 5) %}
-     <a-entity mixin="cheese" time="10" scale="0.5 0.5 0.5" rotation={{r}}
-     position="{{ x * 15 - 47 }} 10 {{ z * 15 - 47}}">
-   </a-entity>
-   {% endfor %}
-   {% endfor %}
- </script>
+  
 
  <!--------------------------setModel--------------------------------------->
  // SKYBOX
@@ -121,13 +119,16 @@ rotation="-90 0 0" scale="2 2 1">
 
 
 
-
 // AVATAR with Camera and movement controls
-<a-entity camera wasd-controls look-controls id="camera2" position="0 1.6 0">
-    <a-box id="avbox" powerup static-body></a-box>
-    <a-sound src="#music1" autoplay="true" loop="true"></a-sound>
-    <a-entity id="hud" health="10" score="0" text="width:1; value: Start Game!;" position="0.3 -0.45 -0.7"></a-entity>
-</a-entity>
+ <a-box  id="avbox" wasd-controls look-controls position="0 1.5 13">
+  <a-entity id="camera2" camera>
+    <a-entity id="hud" health="10" score="0" text="width:3; value: Start Game!;" position="0 1 -2"></a-entity>
+    </a-entity>
+
+  <a-box id="avatar" powerup static-body scale="2 2 2" position="0 0 0" material="color:red">
+    <a-sound src="#music1" autoplay="true" loop=true></a-sound>
+  </a-box>
+</a-box>
 
 </a-scene>
 
