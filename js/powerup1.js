@@ -97,13 +97,14 @@ AFRAME.registerComponent('powerup', {
         elt.parentNode.removeChild(elt)
       }
 
-      if (this.health <0){
-        hud.setAttribute('text','value',"YOU LOSE!! GAME OVER!")
+
+      if (this.score>20 && this.health > 0){
+        this.health = 999;
+        hud.setAttribute('text','value',"YOU WIN!!")
         this.gameOver = true
         setTimeout(function(){ window.history.back(); }, 5000);
-      }
-      if (this.score>20){
-        hud.setAttribute('text','value',"YOU WIN!!")
+      } else if (this.health <0 && this.score < 20){
+        hud.setAttribute('text','value',"YOU LOSE!! GAME OVER!")
         this.gameOver = true
         setTimeout(function(){ window.history.back(); }, 5000);
       }
