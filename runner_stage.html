@@ -120,19 +120,14 @@ rotation="-90 0 0" scale="2 2 1">
 <a-entity mixin="wall" position="80 0 0" rotation="0 90 0" scale="2 2 1" ></a-entity>
 
 
+
+
 // AVATAR with Camera and movement controls
- <a-box  id="avbox" wasd-controls look-controls position="0 1.5 13">
-  <a-entity id="camera2" camera>
-    <a-entity id="hud" health="10" score="0" text="width:3; value: Start Game!;" position="0 1 -2"></a-entity>
-    <a-entity id="gun" shooter geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3" material="color: red" click-to-shoot position="0 0 0"></a-entity>
-    <a-entity id="bulletTemplate" bullet="name: normal; speed: 20.0; poolSize: 20" scale=".5 .5 .5" obj-model="obj: #cheese-obj; mtl: #cheese-mtl"></a-entity>
-  </a-entity>
-
-  <a-box id="avatar" powerup static-body scale="2 2 2" position="0 0 0" material="color:red">
-    <a-sound src="#music1" autoplay="true"></a-sound>
-  </a-box>
-</a-box>
-
+<a-entity camera wasd-controls look-controls id="camera2" position="0 1.6 0">
+    <a-box id="avbox" powerup static-body></a-box>
+    <a-sound src="#music1" autoplay="true" loop="true"></a-sound>
+    <a-entity id="hud" health="10" score="0" text="width:1; value: Start Game!;" position="0.3 -0.45 -0.7"></a-entity>
+</a-entity>
 
 </a-scene>
 
