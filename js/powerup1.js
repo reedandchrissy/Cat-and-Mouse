@@ -71,15 +71,29 @@ AFRAME.registerComponent('powerup', {
 
       if (eltHealth) {
         this.health+= eltHealth;
+        if(eltHealth==-10){
+            let audio = new Audio('sounds/badCat.wav');
+        	audio.play();
+         }else if(eltHealth==-5){
+         	let audio = new Audio('sounds/niceCat.wav');
+        	audio.play();
+         }else{
+          	let audio = new Audio('sounds/health.wav');
+          	audio.play();       	
+         }
       }
 
       if (eltScore) {
         this.score += eltScore;
+        let audio = new Audio('sounds/good.wav');
+        audio.play();
       }
 
       if (eltTime) {
         console.log("updating the time!")
         this.gameLength += eltTime
+        let audio = new Audio('sounds/bite.wav');
+        audio.play();
       }
       console.log(this.startTime)
 
@@ -103,7 +117,7 @@ AFRAME.registerComponent('powerup', {
         hud.setAttribute('text','value',"YOU WIN!!")
         this.gameOver = true
         setTimeout(function(){ window.history.back(); }, 5000);
-      } else if (this.health <0 && this.score < 20){
+      } else if (this.health <0){
         hud.setAttribute('text','value',"YOU LOSE!! GAME OVER!")
         this.gameOver = true
         setTimeout(function(){ window.history.back(); }, 5000);

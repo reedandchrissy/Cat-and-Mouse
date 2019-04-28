@@ -26,7 +26,7 @@
     <script id="timeTemplate" type="text/x-nunjucks-template">
      {% for x in range(0, 5) %}
      {% for z in range(0, 5) %}
-     <a-entity mixin="cheese" time="10" scale="0.5 0.5 0.5" rotation={{r}}
+     <a-entity mixin="cheese" time="5" scale="0.5 0.5 0.5" rotation={{r}}
      position="{{ x * 15 - 47 }} 10 {{ z * 15 - 47}}">
    </a-entity>
    {% endfor %}
@@ -120,7 +120,7 @@ rotation="-90 0 0" scale="2 2 1">
 
 
 // AVATAR with Camera and movement controls
- <a-box  id="avbox" wasd-controls look-controls position="0 1.5 13">
+ <a-box  id="avbox" wasd-controls="acceleration: 120" look-controls  position="0 1.5 13">
   <a-entity id="camera2" camera>
     <a-entity id="hud" health="10" score="0" text="width:3; value: Start Game!;" position="0 1 -2"></a-entity>
     </a-entity>
