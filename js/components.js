@@ -1,4 +1,4 @@
-    var gameTimer = 10000;    
+    var gameTimer = 1000000;    
 
      AFRAME.registerComponent('click-to-shoot', {
       init: function () {
