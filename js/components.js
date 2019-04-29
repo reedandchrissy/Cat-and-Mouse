@@ -100,7 +100,7 @@
           } else {
             waveText.setAttribute('value', 'You');
             wave.setAttribute('value', 'win!');
-            setTimeout(function(){ window.history.back(); }, 5000);
+            setTimeout(function(){ location.reload(); }, 5000);
           }
         }
 
