@@ -85,7 +85,7 @@
         let waveText = document.querySelector('#scene').querySelector('#player').querySelector('#wavetext');
         let ingameTime = gameTimer / 1000;
         if( ingameTime <= -5 ){
-          window.history.back();
+          window.location.href = "shooter_stage.html";
         } 
         if(ingameTime <= 0 ){
           waveText.setAttribute('value', 'You');
