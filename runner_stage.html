@@ -1,19 +1,19 @@
 <html>
-<head>
-  <title>Runner Stage</title>
-  
-  <!-------------------------------- script ------------------------------------->
-  <script src="js/aframe.js"></script>
-  <script src="js/aframe-extras.js"></script>
-  <script src="js/aframe-physics-system.js"></script>
-  <script src="js/aframe-template-component.min.js"></script>
-  <script src="js/test.js"></script>
-  <script src="js/follow.js"></script>
-  <script src="js/powerup1.js"></script>  
-  <script src="js/components.js"></script>
-  <script src="js/aframe-look-at-component.min.js"></script>
-  
-  <script id="coinsTemplate" type="text/x-nunjucks-template">
+  <head>
+    <title>Runner Stage</title>
+
+    <!-------------------------------- script ------------------------------------->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="js/aframe-extras.js"></script>
+    <script src="js/aframe-physics-system.js"></script>
+    <script src="js/aframe-template-component.min.js"></script>
+    <script src="js/test.js"></script>
+    <script src="js/follow.js"></script>
+    <script src="js/powerup1.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/aframe-look-at-component.min.js"></script>
+
+    <script id="coinsTemplate" type="text/x-nunjucks-template">
       {% for x in range(0, 4) %}
         {% for z in range(0, 3) %}
           <a-cylinder mixin="coin" score="10" rotation={{r}}
@@ -24,113 +24,261 @@
     </script>
 
     <script id="timeTemplate" type="text/x-nunjucks-template">
-     {% for x in range(0, 5) %}
-     {% for z in range(0, 5) %}
-     <a-entity mixin="cheese" time="5" scale="0.5 0.5 0.5" rotation={{r}}
-     position="{{ x * 15 - 47 }} 10 {{ z * 15 - 47}}">
-   </a-entity>
-   {% endfor %}
-   {% endfor %}
- </script>
-</head>
+        {% for x in range(0, 5) %}
+        {% for z in range(0, 5) %}
+        <a-entity mixin="cheese" time="5" scale="0.5 0.5 0.5" rotation={{r}}
+        position="{{ x * 15 - 47 }} 10 {{ z * 15 - 47}}">
+      </a-entity>
+      {% endfor %}
+      {% endfor %}
+    </script>
+  </head>
 
-<body>
-  <a-scene physics="friction:0.0; restitution:0.2; debug:false" renderer="antialias:true">
-    <a-assets>
-      <!-- load in the textures -->
-      <img id="floor_img" src="images/cherry_light.jpg">
-      <img id="skybox-tex" src="images/skybox.jpg">
-      <audio id="music1" src="sounds/gamemusic.mp3" preload="auto"></audio>
-      <!-- load in the models -->
-      <a-asset-item id="skybox-obj" src="assets/skybox.obj"></a-asset-item>
-      <a-asset-item id="skybox-mtl" src="assets/skybox.mtl"></a-asset-item>
-      <a-asset-item id="suzy-obj" src="assets/suzy.obj"></a-asset-item>
-      <a-asset-item id="suzy-mtl" src="assets/suzy.mtl"></a-asset-item>
-      <a-asset-item id="cat-obj" src="assets/orange_cat.obj"></a-asset-item>
-      <a-asset-item id="cat-mtl" src="assets/orange_cat.mtl"></a-asset-item>
-      <a-asset-item id="cheese-obj" src="assets/cheese.obj"></a-asset-item>
-      <a-asset-item id="cheese-mtl" src="assets/cheese.mtl"></a-asset-item>
-      <a-asset-item id="scene1-obj" src="assets/scene1.obj"></a-asset-item>
-      <a-asset-item id="scene1-mtl" src="assets/scene1.mtl"></a-asset-item>
-      <a-asset-item id="nicecat-obj" src="assets/black_cat.obj"></a-asset-item>
-      <a-asset-item id="nicecat-mtl" src="assets/black_cat.mtl"></a-asset-item>
+  <body>
+    <a-scene
+      physics="friction:0.0; restitution:0.2; debug:false"
+      renderer="antialias:true"
+    >
+      <a-assets>
+        <!-- load in the textures -->
+        <img id="floor_img" src="images/cherry_light.jpg" />
+        <img id="skybox-tex" src="images/skybox.jpg" />
+        <audio id="music1" src="sounds/gamemusic.mp3" preload="auto"></audio>
+        <!-- load in the models -->
+        <a-asset-item id="skybox-obj" src="assets/skybox.obj"></a-asset-item>
+        <a-asset-item id="skybox-mtl" src="assets/skybox.mtl"></a-asset-item>
+        <a-asset-item id="suzy-obj" src="assets/suzy.obj"></a-asset-item>
+        <a-asset-item id="suzy-mtl" src="assets/suzy.mtl"></a-asset-item>
+        <a-asset-item id="cat-obj" src="assets/orange_cat.obj"></a-asset-item>
+        <a-asset-item id="cat-mtl" src="assets/orange_cat.mtl"></a-asset-item>
+        <a-asset-item id="cheese-obj" src="assets/cheese.obj"></a-asset-item>
+        <a-asset-item id="cheese-mtl" src="assets/cheese.mtl"></a-asset-item>
+        <a-asset-item id="scene1-obj" src="assets/scene1.obj"></a-asset-item>
+        <a-asset-item id="scene1-mtl" src="assets/scene1.mtl"></a-asset-item>
+        <a-asset-item
+          id="nicecat-obj"
+          src="assets/black_cat.obj"
+        ></a-asset-item>
+        <a-asset-item
+          id="nicecat-mtl"
+          src="assets/black_cat.mtl"
+        ></a-asset-item>
 
-      <!-- create some mixins -->
-      <a-mixin id="skybox1" obj-model="obj:#skybox-obj; mtl:#skybox-mtl"></a-mixin>
-      <a-mixin id="skybox2" obj-model="obj:#skybox-obj" material="shader:flat;src:#skybox-tex"></a-mixin>
-      <a-mixin id="suzy" dynamic-body="angularDamping:0.99; shape:cylinder" obj-model="obj:#suzy-obj; mtl:#suzy-mtl" follow="target:#avbox; speed:1"></a-mixin>
-      <a-mixin id="cat" dynamic-body= "angularDamping:0.99; shape:cylinder" obj-model="obj:#cat-obj; mtl:#cat-mtl" follow="target:#avbox; speed:5" look-at = "#avbox"></a-mixin>
-      <a-mixin id="nicecat" dynamic-body= "angularDamping:0.99; shape:cylinder" obj-model="obj:#nicecat-obj; mtl:#nicecat-mtl" follow="target:#avbox; speed:3" look-at = "#avbox"></a-mixin>
-      <a-mixin id="donut" dynamic-body material="color:#AA5500" arc="360" radius="0.4" radius-tubular="0.1" scale="0.2 0.2 0.2"></a-mixin>
-      <a-mixin id="cheese" dynamic-body obj-model="obj:#cheese-obj; mtl:#cheese-mtl"></a-mixin>
-      <a-mixin id="coin" rotation="90 0 0" scale="0.4 0.1 0.4" dynamic-body material="color:goldenrod"></a-mixin>
-      <a-mixin id="wall" geometry="primitive:box; height:1; width:80; depth:1" static-body material="src:#floor_img; repeat:4 4; side:double; shader:standard"></a-mixin>
-      <a-mixin id="timer" scale="4 4 4" material="color:red" dynamic-body></a-mixin>
-    </a-assets>
+        <!-- create some mixins -->
+        <a-mixin
+          id="skybox1"
+          obj-model="obj:#skybox-obj; mtl:#skybox-mtl"
+        ></a-mixin>
+        <a-mixin
+          id="skybox2"
+          obj-model="obj:#skybox-obj"
+          material="shader:flat;src:#skybox-tex"
+        ></a-mixin>
+        <a-mixin
+          id="suzy"
+          dynamic-body="angularDamping:0.99; shape:cylinder"
+          obj-model="obj:#suzy-obj; mtl:#suzy-mtl"
+          follow="target:#avbox; speed:1"
+        ></a-mixin>
+        <a-mixin
+          id="cat"
+          dynamic-body="angularDamping:0.99; shape:cylinder"
+          obj-model="obj:#cat-obj; mtl:#cat-mtl"
+          follow="target:#avbox; speed:5"
+          look-at="#avbox"
+        ></a-mixin>
+        <a-mixin
+          id="nicecat"
+          dynamic-body="angularDamping:0.99; shape:cylinder"
+          obj-model="obj:#nicecat-obj; mtl:#nicecat-mtl"
+          follow="target:#avbox; speed:3"
+          look-at="#avbox"
+        ></a-mixin>
+        <a-mixin
+          id="donut"
+          dynamic-body
+          material="color:#AA5500"
+          arc="360"
+          radius="0.4"
+          radius-tubular="0.1"
+          scale="0.2 0.2 0.2"
+        ></a-mixin>
+        <a-mixin
+          id="cheese"
+          dynamic-body
+          obj-model="obj:#cheese-obj; mtl:#cheese-mtl"
+        ></a-mixin>
+        <a-mixin
+          id="coin"
+          rotation="90 0 0"
+          scale="0.4 0.1 0.4"
+          dynamic-body
+          material="color:goldenrod"
+        ></a-mixin>
+        <a-mixin
+          id="wall"
+          geometry="primitive:box; height:1; width:80; depth:1"
+          static-body
+          material="src:#floor_img; repeat:4 4; side:double; shader:standard"
+        ></a-mixin>
+        <a-mixin
+          id="timer"
+          scale="4 4 4"
+          material="color:red"
+          dynamic-body
+        ></a-mixin>
+      </a-assets>
 
-      <!---------------------------scene0------------------------------------------> 
-  
+      <!---------------------------scene0------------------------------------------>
 
- <!--------------------------setModel--------------------------------------->
- // SKYBOX
- <a-obj-model mixin="skybox2"></a-obj-model>
+      <!--------------------------setModel--------------------------------------->
+      // SKYBOX
+      <a-obj-model mixin="skybox2"></a-obj-model>
 
- // BACKGROUND IMAGE
- <a-entity obj-model="obj: #scene1-obj; mtl: #scene1-mtl" position="0 1 -20" scale="5 5 5" rotation="0 270 0" ></a-entity>
+      // BACKGROUND IMAGE
+      <a-entity
+        obj-model="obj: #scene1-obj; mtl: #scene1-mtl"
+        position="0 1 -20"
+        scale="5 5 5"
+        rotation="0 270 0"
+      ></a-entity>
 
- // TIMING POWERUPS
- <a-entity template="src: #timeTemplate" data-r="0 60 0" ></a-entity>
+      // TIMING POWERUPS
+      <a-entity template="src: #timeTemplate" data-r="0 60 0"></a-entity>
 
- // COINS
- <a-entity template="src: #coinsTemplate" data-r="0 45 0" ></a-entity>
+      // COINS
+      <a-entity template="src: #coinsTemplate" data-r="0 45 0"></a-entity>
 
- // NPCs that decrease your health 
- <a-obj-model mixin="cat"  health="-10" position="7 1 -10" rotaion = "0 90 0" look-at = "#avbox"\></a-obj-model>
- <a-obj-model mixin="cat"  health="-10" position="-7 1 -10" rotaion = "0 90 0" look-at = "#avbox"\></a-obj-model>
- <a-obj-model mixin="cat"  health="-10" position="3 1 -20" rotaion = "0 90 0"look-at = "#avbox"\></a-obj-model>
+      // NPCs that decrease your health
+      <a-obj-model
+        mixin="cat"
+        health="-10"
+        position="7 1 -10"
+        rotaion="0 90 0"
+        look-at="#avbox"
+        \
+      ></a-obj-model>
+      <a-obj-model
+        mixin="cat"
+        health="-10"
+        position="-7 1 -10"
+        rotaion="0 90 0"
+        look-at="#avbox"
+        \
+      ></a-obj-model>
+      <a-obj-model
+        mixin="cat"
+        health="-10"
+        position="3 1 -20"
+        rotaion="0 90 0"
+        look-at="#avbox"
+        \
+      ></a-obj-model>
 
- <a-obj-model mixin="nicecat"  health="-5" position="5 1 -10" rotaion = "0 90 0" look-at = "#avbox"\></a-obj-model>
- <a-obj-model mixin="nicecat"  health="-5" position="-5 1 -10" rotaion = "0 90 0" look-at = "#avbox"\></a-obj-model>
- <a-obj-model mixin="nicecat"  health="-5" position="0 1 -20" rotaion = "0 90 0"look-at = "#avbox"\></a-obj-model>
+      <a-obj-model
+        mixin="nicecat"
+        health="-5"
+        position="5 1 -10"
+        rotaion="0 90 0"
+        look-at="#avbox"
+        \
+      ></a-obj-model>
+      <a-obj-model
+        mixin="nicecat"
+        health="-5"
+        position="-5 1 -10"
+        rotaion="0 90 0"
+        look-at="#avbox"
+        \
+      ></a-obj-model>
+      <a-obj-model
+        mixin="nicecat"
+        health="-5"
+        position="0 1 -20"
+        rotaion="0 90 0"
+        look-at="#avbox"
+        \
+      ></a-obj-model>
 
+      // donuts to increase your health
 
- // donuts to increase your health
+      <a-torus mixin="donut" health="5" position="-9 10 -21"></a-torus>
+      <a-torus mixin="donut" health="5" position="-18 10 -6"></a-torus>
+      <a-torus mixin="donut" health="5" position="3 10 -21"></a-torus>
+      <a-torus mixin="donut" health="5" position="12 10 -8"></a-torus>
+      <a-torus mixin="donut" health="5" position="3 10 -5"></a-torus>
 
+      // LIGHTING
+      <!-- we add a point light and some ambient light -->
+      <a-entity
+        light="type:directional; color: #FFF; intensity: 1.0"
+        position="-10 24 10"
+      ></a-entity>
+      <a-entity light="type:ambient; color: #FFF; intensity: 0.1"></a-entity>
 
-  <a-torus mixin="donut" health="5" position="-9 10 -21"></a-torus>
-  <a-torus mixin="donut" health="5" position="-18 10 -6"></a-torus>
-  <a-torus mixin="donut" health="5" position="3 10 -21"></a-torus>
-  <a-torus mixin="donut" health="5" position="12 10 -8"></a-torus>
-  <a-torus mixin="donut" health="5" position="3 10 -5"></a-torus>
+      // GAME FLOOR with walls (powerup.js keeps avatar within the walls)
+      <a-entity
+        geometry="primitive:plane; height:80; width:80"
+        static-body
+        material="src:#floor_img; repeat:4 4; side:double; shader:standard"
+        position="0 0 0"
+        rotation="-90 0 0"
+        scale="2 2 1"
+      >
+      </a-entity>
+      <a-entity
+        mixin="wall"
+        position="0 0 -80"
+        rotation="0 0 0"
+        scale="2 2 1"
+      ></a-entity>
+      <a-entity
+        mixin="wall"
+        position="0 0 80"
+        rotation="0 0 0"
+        scale="2 2 1"
+      ></a-entity>
+      <a-entity
+        mixin="wall"
+        position="-80 0 0"
+        rotation="0 90 0"
+        scale="2 2 1"
+      ></a-entity>
+      <a-entity
+        mixin="wall"
+        position="80 0 0"
+        rotation="0 90 0"
+        scale="2 2 1"
+      ></a-entity>
 
- // LIGHTING
- <!-- we add a point light and some ambient light -->
- <a-entity light="type:directional; color: #FFF; intensity: 1.0" position="-10 24 10"></a-entity>
-<a-entity light="type:ambient; color: #FFF; intensity: 0.1" ></a-entity>
+      // AVATAR with Camera and movement controls
+      <a-box
+        id="avbox"
+        wasd-controls="acceleration: 120"
+        look-controls
+        position="0 1.5 13"
+      >
+        <a-entity id="camera2" camera>
+          <a-entity
+            id="hud"
+            health="10"
+            score="0"
+            text="width:3; value: Start Game!;"
+            position="0 1 -2"
+          ></a-entity>
+        </a-entity>
 
-// GAME FLOOR with walls (powerup.js keeps avatar within the walls)
-<a-entity geometry="primitive:plane; height:80; width:80" static-body material="src:#floor_img; repeat:4 4; side:double; shader:standard" position="0 0 0" 
-rotation="-90 0 0" scale="2 2 1">
-</a-entity>
-<a-entity mixin="wall" position="0 0 -80" rotation="0 0 0" scale="2 2 1"></a-entity>
-<a-entity mixin="wall" position="0 0 80" rotation="0 0 0" scale="2 2 1" ></a-entity>
-<a-entity mixin="wall" position="-80 0 0" rotation="0 90 0" scale="2 2 1" ></a-entity>
-<a-entity mixin="wall" position="80 0 0" rotation="0 90 0" scale="2 2 1" ></a-entity>
-
-
-
-// AVATAR with Camera and movement controls
- <a-box  id="avbox" wasd-controls="acceleration: 120" look-controls  position="0 1.5 13">
-  <a-entity id="camera2" camera>
-    <a-entity id="hud" health="10" score="0" text="width:3; value: Start Game!;" position="0 1 -2"></a-entity>
-    </a-entity>
-
-  <a-box id="avatar" powerup static-body scale="2 2 2" position="0 0 0" material="color:red">
-    <a-sound src="#music1" autoplay="true" loop=true></a-sound>
-  </a-box>
-</a-box>
-
-</a-scene>
-
-</body>
+        <a-box
+          id="avatar"
+          powerup
+          static-body
+          scale="2 2 2"
+          position="0 0 0"
+          material="color:red"
+        >
+          <a-sound src="#music1" autoplay="true" loop="true"></a-sound>
+        </a-box>
+      </a-box>
+    </a-scene>
+  </body>
 </html>

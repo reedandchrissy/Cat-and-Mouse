@@ -1,79 +1,228 @@
 <html>
-<head>
-  <script src="js/aframe.js"></script>
-  <script src="js/components.js"></script>
-  <script src="js/aframe-look-at-component.min.js"></script>
-  <script src="js/aframe-super-shooter-kit.min.js"></script>
+  <head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/aframe-look-at-component.min.js"></script>
+    <script src="js/aframe-super-shooter-kit.min.js"></script>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-  <title>Shooter Stage</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
+    />
+    <title>Shooter Stage</title>
+  </head>
 
-</head>
+  <body>
+    <a-scene id="scene" spawn>
+      <!----------------------------------------------------- assets ---------------------------------------------------------------->
+      <a-asset-item id="landscape-mtl" src="assets/scene2.mtl"></a-asset-item>
+      <a-asset-item id="landscape-obj" src="assets/scene2.obj"></a-asset-item>
+      <a-asset-item id="tree-mtl" src="assets/singletree.mtl"></a-asset-item>
+      <a-asset-item id="tree-obj" src="assets/singletree.obj"></a-asset-item>
+      <a-asset-item id="twotrees-mtl" src="assets/twotrees.mtl"></a-asset-item>
+      <a-asset-item id="twotrees-obj" src="assets/twotrees.obj"></a-asset-item>
+      <a-asset-item id="cat-obj" src="assets/orange_cat.obj"></a-asset-item>
+      <a-asset-item id="cat-mtl" src="assets/orange_cat.mtl"></a-asset-item>
+      <a-asset-item id="mouse-obj" src="assets/mouse.obj"></a-asset-item>
+      <a-asset-item id="mouse-mtl" src="assets/mouse.mtl"></a-asset-item>
+      <a-asset-item id="cheese-obj" src="assets/cheese.obj"></a-asset-item>
+      <a-asset-item id="cheese-mtl" src="assets/cheese.mtl"></a-asset-item>
+      <audio
+        id="music"
+        src="sounds/techno-80-base-loop.mp3"
+        preload="true"
+      ></audio>
 
-<body>
-  <a-scene id="scene" spawn>
+      <!----------------------------------------------------- models ---------------------------------------------------------------->
+      <a-sky color="#58D3F7"></a-sky>
+      <a-entity
+        obj-model="obj: #landscape-obj; mtl: #landscape-mtl"
+        position="30 0 -20"
+        scale="10 10 10"
+        rotation="0 270 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #landscape-obj; mtl: #landscape-mtl"
+        position="-130 0 100"
+        scale="100 100 100"
+        rotation="0 90 0"
+      ></a-entity>
+      <a-obj-model
+        id="base"
+        class="target"
+        target="healthPoints: 2"
+        position="0 -10 0"
+        obj-model="obj: #cat-obj; mtl: #cat-mtl"
+        hit-handler
+        look-at="#player"
+      ></a-obj-model>
 
-   <!----------------------------------------------------- assets ---------------------------------------------------------------->
-   <a-asset-item id="landscape-mtl" src="assets/scene2.mtl"></a-asset-item>
-   <a-asset-item id="landscape-obj" src="assets/scene2.obj"></a-asset-item>
-   <a-asset-item id="tree-mtl" src="assets/singletree.mtl"></a-asset-item>
-   <a-asset-item id="tree-obj" src="assets/singletree.obj"></a-asset-item>
-   <a-asset-item id="twotrees-mtl" src="assets/twotrees.mtl"></a-asset-item>
-   <a-asset-item id="twotrees-obj" src="assets/twotrees.obj"></a-asset-item>
-   <a-asset-item id="cat-obj" src="assets/orange_cat.obj"></a-asset-item>
-   <a-asset-item id="cat-mtl" src="assets/orange_cat.mtl"></a-asset-item>
-   <a-asset-item id="mouse-obj" src="assets/mouse.obj"></a-asset-item>
-   <a-asset-item id="mouse-mtl" src="assets/mouse.mtl"></a-asset-item>
-   <a-asset-item id="cheese-obj" src="assets/cheese.obj"></a-asset-item>
-   <a-asset-item id="cheese-mtl" src="assets/cheese.mtl"></a-asset-item>
-   <audio id="music" src="sounds/techno-80-base-loop.mp3" preload="true"></audio>
+      <!----------------------------------------------------- large trees ---------------------------------------------------------------->
+      <a-entity
+        obj-model="obj: #tree-obj; mtl: #tree-mtl"
+        position="60 0 -110"
+        scale="30 30 30"
+        rotation="0 90 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #tree-obj; mtl: #tree-mtl"
+        position="60 0 -80"
+        scale="30 30 30"
+        rotation="0 90 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #tree-obj; mtl: #tree-mtl"
+        position="-50 0 -180"
+        scale="30 30 30"
+        rotation="0 90 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #tree-obj; mtl: #tree-mtl"
+        position="-20 0 -180"
+        scale="30 30 30"
+        rotation="0 90 0"
+      ></a-entity>
 
-   <!----------------------------------------------------- models ---------------------------------------------------------------->
-   <a-sky color="#58D3F7"></a-sky>
-   <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="30 0 -20" scale="10 10 10" rotation="0 270 0"></a-entity>
-   <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="-130 0 100" scale="100 100 100" rotation="0 90 0"></a-entity>
-   <a-obj-model id="base" class="target" target="healthPoints: 2" position="0 -10 0" obj-model="obj: #cat-obj; mtl: #cat-mtl" hit-handler look-at="#player"></a-obj-model>
+      <!----------------------------------------------------- smaller trees ---------------------------------------------------------------->
+      <a-entity
+        obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl"
+        position="50 0 30"
+        scale="10 10 10"
+        rotation="0 210 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl"
+        position="50 0 40"
+        scale="10 10 10"
+        rotation="0 210 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl"
+        position="50 0 50"
+        scale="10 10 10"
+        rotation="0 210 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl"
+        position="50 0 60"
+        scale="10 10 10"
+        rotation="0 210 0"
+      ></a-entity>
 
-   <!----------------------------------------------------- large trees ---------------------------------------------------------------->
-   <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="60 0 -110" scale="30 30 30" rotation="0 90 0"></a-entity>
-   <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="60 0 -80" scale="30 30 30" rotation="0 90 0"></a-entity>
-   <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="-50 0 -180" scale="30 30 30" rotation="0 90 0"></a-entity>
-   <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl" position="-20 0 -180" scale="30 30 30" rotation="0 90 0"></a-entity>
+      <a-entity
+        obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl"
+        position="-20 0 -75"
+        scale="10 10 10"
+        rotation="0 50 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl"
+        position="-10 0 -75"
+        scale="10 10 10"
+        rotation="0 50 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl"
+        position="0 0 -75"
+        scale="10 10 10"
+        rotation="0 50 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl"
+        position="10 0 -75"
+        scale="10 10 10"
+        rotation="0 50 0"
+      ></a-entity>
 
-   <!----------------------------------------------------- smaller trees ---------------------------------------------------------------->
-   <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="50 0 30" scale="10 10 10" rotation="0 210 0"></a-entity>
-   <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="50 0 40" scale="10 10 10" rotation="0 210 0"></a-entity>
-   <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="50 0 50" scale="10 10 10" rotation="0 210 0"></a-entity>
-   <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="50 0 60" scale="10 10 10" rotation="0 210 0"></a-entity>
+      <!----------------------------------------------------- HUD ----------- ---------------------------------------------------------------->
+      <a-entity camera look-controls id="player" position="0 1.6 0">
+        <a-sound src="#music" autoplay="true" loop="true"></a-sound>
 
-   <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="-20 0 -75" scale="10 10 10" rotation="0 50 0"></a-entity>
-   <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="-10 0 -75" scale="10 10 10" rotation="0 50 0"></a-entity>
-   <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="0 0 -75" scale="10 10 10" rotation="0 50 0"></a-entity>
-   <a-entity obj-model="obj: #twotrees-obj; mtl: #twotrees-mtl" position="10 0 -75" scale="10 10 10" rotation="0 50 0"></a-entity>
+        <a-text
+          id="score text"
+          value="Score:"
+          position="-0.1 -0.15 -0.7"
+          color="red"
+          width="1"
+          anchor="left"
+        ></a-text>
+        <a-text
+          id="score"
+          value="0"
+          position="0.1 -0.15 -0.7"
+          color="red"
+          width="1"
+          anchor="left"
+        ></a-text>
 
-   <!----------------------------------------------------- HUD ----------- ---------------------------------------------------------------->
-   <a-entity camera look-controls id="player" position="0 1.6 0">
+        <a-text
+          id="time text"
+          value="Time:"
+          position="-0.1 -0.2 -0.7"
+          color="red"
+          width="1"
+          anchor="left"
+        ></a-text>
+        <a-text
+          id="time"
+          value="15"
+          position="0.1 -0.2 -0.7"
+          color="red"
+          width="1"
+          anchor="left"
+          timer
+        ></a-text>
 
-    <a-sound src="#music" autoplay="true" loop="true"></a-sound>
+        <a-text
+          id="counter text"
+          value="Enemies:"
+          position="-0.1 -0.25 -0.7"
+          color="red"
+          width="1"
+          anchor="left"
+        ></a-text>
+        <a-text
+          id="counter"
+          value="0"
+          position="0.1 -0.25 -0.7"
+          color="red"
+          width="1"
+          anchor="left"
+        ></a-text>
 
-    <a-text id="score text" value="Score:" position="-0.1 -0.15 -0.7" color="red" width="1" anchor="left"></a-text>
-    <a-text id="score" value="0" position="0.1 -0.15 -0.7" color="red" width="1" anchor="left"></a-text>
+        <a-text
+          id="wavetext"
+          value="WAVE"
+          position="-0.1 0.45 -1"
+          color="red"
+          width="2"
+          anchor="left"
+        ></a-text>
+        <a-text
+          id="wave"
+          value="1"
+          position="0 0.35 -1"
+          color="red"
+          width="2"
+          anchor="left"
+        ></a-text>
 
-    <a-text id="time text" value="Time:" position="-0.1 -0.2 -0.7" color="red" width="1" anchor="left"></a-text>
-    <a-text id="time" value="15" position="0.1 -0.2 -0.7" color="red" width="1" anchor="left" timer></a-text>
-
-    <a-text id="counter text" value="Enemies:" position="-0.1 -0.25 -0.7" color="red" width="1" anchor="left"></a-text>
-    <a-text id="counter" value="0" position="0.1 -0.25 -0.7" color="red" width="1" anchor="left"></a-text>
-
-    <a-text id="wavetext" value="WAVE" position="-0.1 0.45 -1" color="red" width="2" anchor="left"></a-text>
-    <a-text id="wave" value="1" position="0 0.35 -1" color="red" width="2" anchor="left"></a-text>
-
-    <a-entity id="gun" shooter geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3" material="color: red" click-to-shoot position="0 0 0"></a-entity>
-    <a-entity id="bulletTemplate" bullet="name: normal; speed: 20.0; poolSize: 20" scale=".5 .5 .5" obj-model="obj: #cheese-obj; mtl: #cheese-mtl"></a-entity>
-  </a-entity>
-
-
-</a-scene>
-</body>
+        <a-entity
+          id="gun"
+          shooter
+          geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3"
+          material="color: red"
+          click-to-shoot
+          position="0 0 0"
+        ></a-entity>
+        <a-entity
+          id="bulletTemplate"
+          bullet="name: normal; speed: 20.0; poolSize: 20"
+          scale=".5 .5 .5"
+          obj-model="obj: #cheese-obj; mtl: #cheese-mtl"
+        ></a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
 </html>

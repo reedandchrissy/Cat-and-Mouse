@@ -1,58 +1,144 @@
 <html>
-<head>
-  <title>Rats'N'Cats</title>
-  
-  <!-------------------------------- script ------------------------------------->
-  <script src="js/aframe.js"></script>
-  <script src="js/components.js"></script>
-  <script src="js/aframe-look-at-component.min.js"></script>
-  <script src="js/aframe-super-shooter-kit.min.js"></script> 
+  <head>
+    <title>Rats'N'Cats</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-</head>
+    <!-------------------------------- script ------------------------------------->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/aframe-look-at-component.min.js"></script>
+    <script src="js/aframe-super-shooter-kit.min.js"></script>
 
-<body>
-  <a-scene>
-    <a-asset-item id="o_cat-obj" src="assets/orange_cat.obj"></a-asset-item>
-    <a-asset-item id="o_cat-mtl" src="assets/orange_cat.mtl"></a-asset-item>
-    <a-asset-item id="b_cat-obj" src="assets/black_cat.obj"></a-asset-item>
-    <a-asset-item id="b_cat-mtl" src="assets/black_cat.mtl"></a-asset-item>
-    <a-asset-item id="cheese-obj" src="assets/cheese.obj"></a-asset-item>
-    <a-asset-item id="cheese-mtl" src="assets/cheese.mtl"></a-asset-item>
-    <a-asset-item id="landscape-mtl" src="assets/scene2.mtl"></a-asset-item>
-    <a-asset-item id="landscape-obj" src="assets/scene2.obj"></a-asset-item>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"
+    />
+  </head>
 
-    <!--------------------------setCamera--------------------------------------->
-    <a-entity camera look-controls id="player" position="0 1.6 0">
-      <a-entity id="gun" shooter geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3" material="color: red" click-to-shoot position="0 0 0"></a-entity>
-      <a-entity id="bulletTemplate" bullet="name: normal; speed: 20.0; poolSize: 20" obj-model="obj: #cheese-obj; mtl: #cheese-mtl"></a-entity>
-    </a-entity>
+  <body>
+    <a-scene>
+      <a-asset-item id="o_cat-obj" src="assets/orange_cat.obj"></a-asset-item>
+      <a-asset-item id="o_cat-mtl" src="assets/orange_cat.mtl"></a-asset-item>
+      <a-asset-item id="b_cat-obj" src="assets/black_cat.obj"></a-asset-item>
+      <a-asset-item id="b_cat-mtl" src="assets/black_cat.mtl"></a-asset-item>
+      <a-asset-item id="cheese-obj" src="assets/cheese.obj"></a-asset-item>
+      <a-asset-item id="cheese-mtl" src="assets/cheese.mtl"></a-asset-item>
+      <a-asset-item id="landscape-mtl" src="assets/scene2.mtl"></a-asset-item>
+      <a-asset-item id="landscape-obj" src="assets/scene2.obj"></a-asset-item>
 
-    <!--------------------------scene--------------------------------------->
-    <a-sky color="#58D3F7"></a-sky>
-    <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="30 0 0" scale="10 10 10" rotation="0 270 0"></a-entity>
-    <a-entity obj-model="obj: #landscape-obj; mtl: #landscape-mtl" position="-130 0 100" scale="100 100 100" rotation="0 90 0"></a-entity>
+      <!--------------------------setCamera--------------------------------------->
+      <a-entity camera look-controls id="player" position="0 1.6 0">
+        <a-entity
+          id="gun"
+          shooter
+          geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.3"
+          material="color: red"
+          click-to-shoot
+          position="0 0 0"
+        ></a-entity>
+        <a-entity
+          id="bulletTemplate"
+          bullet="name: normal; speed: 20.0; poolSize: 20"
+          obj-model="obj: #cheese-obj; mtl: #cheese-mtl"
+        ></a-entity>
+      </a-entity>
 
-    <a-text text="value: Rats'N'Cats\n;" position = "0 3 -5" color="red" transparent = true scale = "1 0.9 0.9"anchor = center ></a-text>
-    <a-text text="value: You are the rat, in order to avoid the cat, \nyou should either be a fast runner or a smart shooter\n;" position = "0 2.5 -5" color="red" transparent = true scale = "1 0.9 0.9" anchor = center ></a-text>
+      <!--------------------------scene--------------------------------------->
+      <a-sky color="#58D3F7"></a-sky>
+      <a-entity
+        obj-model="obj: #landscape-obj; mtl: #landscape-mtl"
+        position="30 0 0"
+        scale="10 10 10"
+        rotation="0 270 0"
+      ></a-entity>
+      <a-entity
+        obj-model="obj: #landscape-obj; mtl: #landscape-mtl"
+        position="-130 0 100"
+        scale="100 100 100"
+        rotation="0 90 0"
+      ></a-entity>
 
-    <a-obj-model id="base" class="target" target="healthPoints: 2" position="-4 1 -5" obj-model="obj: #b_cat-obj; mtl: #b_cat-mtl" hit-handler look-at="#player" load-runner-stage></a-obj-model>
-    <a-text value="Runner" position = "-4.75 3 -5" color="red" transparent = true scale ="2 2 2" ></a-text>
-	<a-text value="You have 30s to get 30 scores \nto win the game\n\n	Coins: +10 Score\n	Donuts: +5 Health\n	Cheese: +5 Time\n	Black Cat: -5 Health\n	Orange Cat: -10 Health"
-    position = "-12 3 -3" color="black" transparent = true scale ="1.5 1.5 1.5" rotation = "0 30 0"anchor = left></a-text>
-	
-    <a-obj-model id="base" class="target" target="healthPoints: 2" position="4 1 -5" obj-model="obj: #o_cat-obj; mtl: #o_cat-mtl" hit-handler look-at="#player" load-shooter-stage></a-obj-model>
-    <a-text value="Shooter" position = "3.25 3 -5 1 0" color="red" scale = "2 2 2" ></a-text>
-    <a-text value="You have 10s to win the game\nShoot as many enemy as you can!" position="4.5 3 -3" color = "orange" transparent=true scale = "1 1 1"  rotation = "0 -30 0" anchor = left></a-text>
-   
+      <a-text
+        text="value: Rats'N'Cats\n;"
+        position="0 3 -5"
+        color="red"
+        transparent="true"
+        scale="1 0.9 0.9"
+        anchor="center"
+      ></a-text>
+      <a-text
+        text="value: You are the rat, in order to avoid the cat, \nyou should either be a fast runner or a smart shooter\n;"
+        position="0 2.5 -5"
+        color="red"
+        transparent="true"
+        scale="1 0.9 0.9"
+        anchor="center"
+      ></a-text>
 
-    <a-light id="ambient1" type="ambient" color="#e9f2f1" >
-      <a-animation attribute="intensity" begin="aaa" from="0" to="1" delay="100" dur="1000" fill="both"></a-animation>
-    </a-light>
+      <a-obj-model
+        id="base"
+        class="target"
+        target="healthPoints: 2"
+        position="-4 1 -5"
+        obj-model="obj: #b_cat-obj; mtl: #b_cat-mtl"
+        hit-handler
+        look-at="#player"
+        load-runner-stage
+      ></a-obj-model>
+      <a-text
+        value="Runner"
+        position="-4.75 3 -5"
+        color="red"
+        transparent="true"
+        scale="2 2 2"
+      ></a-text>
+      <a-text
+        value="You have 30s to get 30 scores \nto win the game\n\n	Coins: +10 Score\n	Donuts: +5 Health\n	Cheese: +5 Time\n	Black Cat: -5 Health\n	Orange Cat: -10 Health"
+        position="-12 3 -3"
+        color="black"
+        transparent="true"
+        scale="1.5 1.5 1.5"
+        rotation="0 30 0"
+        anchor="left"
+      ></a-text>
 
+      <a-obj-model
+        id="base"
+        class="target"
+        target="healthPoints: 2"
+        position="4 1 -5"
+        obj-model="obj: #o_cat-obj; mtl: #o_cat-mtl"
+        hit-handler
+        look-at="#player"
+        load-shooter-stage
+      ></a-obj-model>
+      <a-text
+        value="Shooter"
+        position="3.25 3 -5 1 0"
+        color="red"
+        scale="2 2 2"
+      ></a-text>
+      <a-text
+        value="You have 10s to win the game\nShoot as many enemy as you can!"
+        position="4.5 3 -3"
+        color="orange"
+        transparent="true"
+        scale="1 1 1"
+        rotation="0 -30 0"
+        anchor="left"
+      ></a-text>
 
-
-  </a-scene>
-</body>
+      <a-light id="ambient1" type="ambient" color="#e9f2f1">
+        <a-animation
+          attribute="intensity"
+          begin="aaa"
+          from="0"
+          to="1"
+          delay="100"
+          dur="1000"
+          fill="both"
+        ></a-animation>
+      </a-light>
+    </a-scene>
+  </body>
 </html>
